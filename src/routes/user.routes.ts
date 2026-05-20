@@ -13,4 +13,8 @@ userRouter.post('/users', (req: Request, res: Response) => userController.create
 
 userRouter.get('/users/:id', (req: Request, res: Response) => userController.getUserById(req, res));
 
+userRouter.patch('/users/:id', (req: Request, res: Response) => userController.updateUser(req, res));
+
+userRouter.delete('/users/:id', (req: Request, res: Response) => userController.deleteUser(req, res));
+
 export default userRouter;

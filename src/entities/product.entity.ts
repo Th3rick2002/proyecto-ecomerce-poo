@@ -1,8 +1,9 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Category} from "./category.entity";
+import {BaseEntity} from "./baseEntity";
 
 @Entity()
-export class Product {
+export class Product extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
@@ -23,6 +24,11 @@ export class Product {
     })
     stock: number;
 
+
+    @Column({ type: "int", nullable: true })
+    categoryId: number;
+
     @ManyToOne(() => Category)
+    @JoinColumn({ name: "categoryId" })
     category: Category
 }

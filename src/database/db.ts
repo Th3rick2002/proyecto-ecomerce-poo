@@ -2,6 +2,8 @@ import { DataSource } from "typeorm"
 import {User} from "../entities/user.entity";
 import {Category} from "../entities/category.entity";
 import {Product} from "../entities/product.entity";
+import {Order} from "../entities/order.entity";
+import {OrderDetailsEntity} from "../entities/orderDetails.entity";
 
 const host: string = process.env.DB_HOST || 'localhost';
 const port: number = Number(process.env.DB_PORT) || 5432;
@@ -37,7 +39,7 @@ export class DataBase {
             username: this.username,
             password: this.password,
             database: this.database,
-            entities: [User, Category, Product],
+            entities: [User, Category, Product, Order, OrderDetailsEntity],
             synchronize: true
         })
     }

@@ -36,4 +36,25 @@ export class UserController {
             message: "Usuario creado correctamente",
         })
     }
+
+    async updateUser(req: Request, res: Response) {
+        const { id } = req.params;
+        const user: IUser = req.body;
+
+        await this.userService.updateUser(id, user);
+
+        res.status(200).json({
+            message: "Usuario actualizado correctamente",
+        })
+    }
+
+    async deleteUser(req: Request, res: Response) {
+        const { id } = req.params;
+
+        await this.userService.deleteUser(id);
+
+        res.status(200).json({
+            message: "Usuario eliminado correctamente",
+        })
+    }
 }
