@@ -9,8 +9,16 @@ export class UserService {
     private database = DataBase.getDataBaseInstance();
     private userRepository = this.database.getDataSource().getRepository(User);
 
-    getAllUsers() {
-        return this.userRepository.find();
+    async getAllUsers() {
+        const users = await this.userRepository.find();
+
+        const response: IUserResponse[] = users.map(user => ({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+        }))
+
+        return response;
     }
 
     async getUserById(id: string) {

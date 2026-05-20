@@ -10,6 +10,7 @@ const port: number = Number(process.env.DB_PORT) || 5432;
 const username: string = process.env.DB_USERNAME || 'root';
 const password: string = process.env.DB_PASSWORD || 'root';
 const database: string = process.env.DATABASE || 'database';
+const ssl: boolean = process.env.DB_SSL === 'true';
 
 export class DataBase {
     private static instance: DataBase;
@@ -19,19 +20,22 @@ export class DataBase {
     private readonly username: string;
     private readonly password: string;
     private readonly database: string;
+    private readonly ssl: boolean;
 
     private constructor(
         host: string,
         port: number,
         username: string,
         password: string,
-        database: string
+        database: string,
+        ssl: boolean
     ) {
         this.host = host;
         this.port = port;
         this.username = username;
         this.password = password;
         this.database = database;
+        this.ssl = ssl;
         this.typeormDataSource = new DataSource({
             type: "postgres",
             host: this.host,
@@ -41,13 +45,13 @@ export class DataBase {
             database: this.database,
             entities: [User, Category, Product, Order, OrderDetailsEntity],
             synchronize: true,
-            ssl: true
+            ssl: this.ssl
         })
     }
 
     public static getDataBaseInstance(): DataBase {
         if (!DataBase.instance) {
-            DataBase.instance = new DataBase(host, port, username, password, database);
+            DataBase.instance = new DataBase(host, port, username, password, database, ssl);
         }
         return DataBase.instance;
     }

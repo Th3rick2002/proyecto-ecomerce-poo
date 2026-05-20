@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:18-alpine
+    image: postgres:17-alpine
     container_name: db_ecommerce
     restart: unless-stopped
     environment:
@@ -10,7 +10,23 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_ecommerce:/var/lib/postgresql
+      - postgres_ecommerce:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: backend_ecommerce
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DATABASE: ecommerce_db
+      DB_SSL: "false" # Added this to control SSL
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
 
 volumes:
   postgres_ecommerce:
