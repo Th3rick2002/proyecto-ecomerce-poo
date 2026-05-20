@@ -20,6 +20,10 @@ export class UserController {
     async getUserById(req: Request, res: Response) {
         const { id } = req.params;
 
+        if (typeof id !== 'string') {
+            return res.status(400).json({ message: "ID inválido" });
+        }
+
         const user = await this.userService.getUserById(id);
 
         res.status(200).json({
@@ -41,6 +45,10 @@ export class UserController {
         const { id } = req.params;
         const user: IUser = req.body;
 
+        if (typeof id !== 'string') {
+            return res.status(400).json({ message: "ID inválido" });
+        }
+
         await this.userService.updateUser(id, user);
 
         res.status(200).json({
@@ -50,6 +58,10 @@ export class UserController {
 
     async deleteUser(req: Request, res: Response) {
         const { id } = req.params;
+
+        if (typeof id !== 'string') {
+            return res.status(400).json({ message: "ID inválido" });
+        }
 
         await this.userService.deleteUser(id);
 

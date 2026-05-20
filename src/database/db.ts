@@ -40,7 +40,8 @@ export class DataBase {
             password: this.password,
             database: this.database,
             entities: [User, Category, Product, Order, OrderDetailsEntity],
-            synchronize: true
+            synchronize: true,
+            ssl: true
         })
     }
 
