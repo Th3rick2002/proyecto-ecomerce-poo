@@ -45,7 +45,9 @@ export class DataBase {
             database: this.database,
             entities: [User, Category, Product, Order, OrderDetailsEntity],
             synchronize: true,
-            ssl: this.ssl
+            ssl: {
+                rejectUnauthorized: false
+            }
         })
     }
 
