@@ -1,4 +1,4 @@
-import express, {Express} from "express";
+import express from "express";
 import {DataBase} from "./database/db";
 import userRoutes from "./routes/user.routes";
 import categoryRoutes from "./routes/category.routes";

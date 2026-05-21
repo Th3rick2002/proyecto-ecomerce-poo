@@ -1,2 +1,107 @@
-# proyecto-ecomerce-poo
-Proyecto para las instructorias de practicas de la materia de programación orientaada a objetos
+# Proyecto Prácticas POO - E-commerce API
+
+Este proyecto es una API REST para un sistema de e-commerce básico, desarrollada con Node.js, Express, TypeScript y TypeORM, utilizando PostgreSQL como base de datos.
+
+## Requisitos Previos
+
+Antes de comenzar, asegúrate de tener instalado:
+
+- [Node.js](https://nodejs.org/) (Versión 18 o superior recomendada)
+- [pnpm](https://pnpm.io/) (Gestor de paquetes utilizado en este proyecto)
+- [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/) (Opcional, para levantar la base de datos fácilmente)
+- [PostgreSQL](https://www.postgresql.org/) (Si decides no usar Docker)
+
+## Configuración del Proyecto
+
+Sigue estos pasos para configurar el proyecto localmente:
+
+### 1. Clonar el repositorio
+
+```bash
+git clone <url-del-repositorio>
+cd proyecto-practicas-poo
+```
+
+### 2. Instalar dependencias
+
+```bash
+pnpm install
+```
+
+### 3. Configurar variables de entorno
+
+Crea un archivo `.env` en la raíz del proyecto basándote en el archivo `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Edita el archivo `.env` con tus credenciales de base de datos. Si vas a usar Docker Compose con la configuración por defecto, puedes usar:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+DATABASE=ecommerce_db
+```
+
+### 4. Levantar la base de datos
+
+#### Opción A: Usando Docker Compose (Recomendado)
+
+Si tienes Docker instalado, puedes levantar la base de datos (y opcionalmente el backend) con:
+
+```bash
+# Solo la base de datos
+docker compose up db -d
+
+# Todo el stack (Base de datos + API)
+docker compose up -d
+```
+
+#### Opción B: Base de datos local
+
+Si prefieres usar una instancia local de PostgreSQL, asegúrate de crear la base de datos especificada en tu archivo `.env`.
+
+## Ejecución del Proyecto
+
+Una vez configurada la base de datos y las dependencias, puedes iniciar el servidor:
+
+### Modo Desarrollo
+
+Para ejecutar el servidor con recarga automática al detectar cambios:
+
+```bash
+pnpm dev
+```
+
+El servidor estará disponible en `http://localhost:3000`.
+
+### Modo Producción
+
+Para compilar el proyecto y ejecutar la versión de producción:
+
+```bash
+pnpm build
+pnpm start
+```
+
+## Estructura de la API
+
+La API cuenta con los siguientes prefijos de ruta:
+
+- `/api/users`: Gestión de usuarios.
+- `/api/categories`: Gestión de categorías de productos.
+- `/api/products`: Gestión de productos.
+- `/api/orders`: Gestión de pedidos.
+
+## Tecnologías Utilizadas
+
+- **Runtime:** Node.js
+- **Lenguaje:** TypeScript
+- **Framework Web:** Express
+- **ORM:** TypeORM
+- **Base de Datos:** PostgreSQL
+- **Validación:** class-validator
+- **Contenerización:** Docker / Docker Compose
